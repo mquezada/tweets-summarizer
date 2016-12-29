@@ -1,0 +1,8 @@
+* 29 dic 2016
+** Ideas para continuar
+   1. aumentar tweets con palabras del word2vec, y usar tf-idf para modelar tweets/documentos
+   2. representar tweets/documentos como promedio de vectores de las palabras en w2v
+   3. lo mismo que 2, más aumentar tweets con palabras del w2v
+   4. usar doc2vec para representar tweets/docs
+   5. hacer grafo del evento usando w2v del evento + POS
+   6. lo mismo que 5, usando w2v del corpus
