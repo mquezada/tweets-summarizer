@@ -6,3 +6,29 @@
    4. usar doc2vec para representar tweets/docs
    5. hacer grafo del evento usando w2v del evento + POS
    6. lo mismo que 5, usando w2v del corpus
+* 5 ene 2017
+** Eliminar ruido de eventos
+*** Experimento
+   - agrupar tweets por URL (= documento)
+     - tweets sin URL son el documento correspondiente al mismo tweet
+   - aumentar documentos usando palabras mas similares en w2v general
+   - aplicar tf-idf
+   - hacer clustering (k-means)
+*** Evaluacion
+    - propiedades estructurales del clustering
+      - SSE
+      - diametro
+      - silhouette
+      - distancia intercluster
+        - min
+        - max
+        - avg (centroide)
+*** Parametros
+    - Umbral de similitud W2V
+      - umbral fijo
+      - umbral fijo + codo (2da derivada)
+    - numero de clusters en kmeans
+    - distancia euclidiana o disimilitud coseno
+    - eliminar tweets duplicados
+     
+   
