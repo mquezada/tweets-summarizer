@@ -3,6 +3,8 @@ from nltk.corpus import stopwords
 from nltk.stem.snowball import PorterStemmer
 from nltk.tag.stanford import StanfordPOSTagger
 
+#import gensim
+
 from collections import defaultdict, Counter
 from urllib.parse import urlsplit, urlunsplit
 import re
@@ -21,22 +23,24 @@ class TextProcessor:
         self.stanford_pos_pwd = '/Users/mquezada/stanford-postagger-full-2015-12-09/'
         self.stanford_pos = StanfordPOSTagger(self.stanford_pos_pwd + 'models/english-left3words-distsim.tagger',
                                               self.stanford_pos_pwd + 'stanford-postagger.jar')
-
-        self.tag_vocab = defaultdict(Counter)
-        self.vocab = dict()
-        self.tags = Counter()
+        #self.tag_vocab = defaultdict(Counter)
+        #self.vocab = dict()
+        #self.tags = Counter()
 
     def __iter__(self):
         yield from self.process()
 
     def process(self):
-        for tokens in self.stanford_pos.tag_sents(self.tokenseq_generator()):
+        #for tokens in self.stanford_pos.tag_sents(self.tokenseq_generator()):
+        for tokens in self.tokenseq_generator():
             res = []
-            for token, tag in tokens:
+            #for token, tag in tokens:
+            for token in tokens:
                 processed = self.process_token(token)
                 if processed:
-                    self.tag_vocab[processed].update({tag: 1})
-                    self.tags.update({tag: 1})
+                    #most_similar = self.w2v.most_similar(token)
+                    #self.tag_vocab[processed].update({tag: 1})
+                    #self.tags.update({tag: 1})
 
                     res.append(processed)
             if res:
@@ -64,9 +68,9 @@ class TextProcessor:
         if not t.startswith('#'):
             t = t.translate({ord(k): "" for k in self.punctuation})
 
-        t = self.stemmer.stem(t)
+        #t = self.stemmer.stem(t)
 
-        self.vocab[t] = token
+        #self.vocab[t] = token
         return t
         #return t
 
@@ -82,4 +86,4 @@ if __name__ == '__main__':
 
     for text in processor:
         print(text)
-    print(processor.tag_vocab)
+    #print(processor.tag_vocab)

@@ -7,13 +7,16 @@
    5. hacer grafo del evento usando w2v del evento + POS
    6. lo mismo que 5, usando w2v del corpus
 * 5 ene 2017
+** Semana anterior
+   - doc2vec o word2vec en el mismo evento no funciona bien (pocos datos)
+   - mgraph funcionando!
 ** Eliminar ruido de eventos
 *** Experimento
-   - agrupar tweets por URL (= documento)
-     - tweets sin URL son el documento correspondiente al mismo tweet
-   - aumentar documentos usando palabras mas similares en w2v general
-   - aplicar tf-idf
-   - hacer clustering (k-means)
+   1. agrupar tweets por URL (= documento)
+      - tweets sin URL son el documento correspondiente al mismo tweet
+   2. aumentar documentos usando palabras mas similares en w2v general
+   3. aplicar tf-idf
+   4. hacer clustering (k-means)
 *** Evaluacion
     - propiedades estructurales del clustering
       - SSE
@@ -30,5 +33,8 @@
     - numero de clusters en kmeans
     - distancia euclidiana o disimilitud coseno
     - eliminar tweets duplicados
-     
+    
+* 6 ene 2017
+  - mirar localized pagerank?
+  - elegir un evento, y graficar en 2D las palabras + palabras mas cercanas usando modelo completo
    
