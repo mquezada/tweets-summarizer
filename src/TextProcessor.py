@@ -23,24 +23,26 @@ class TextProcessor:
         self.stanford_pos_pwd = '/Users/mquezada/stanford-postagger-full-2015-12-09/'
         self.stanford_pos = StanfordPOSTagger(self.stanford_pos_pwd + 'models/english-left3words-distsim.tagger',
                                               self.stanford_pos_pwd + 'stanford-postagger.jar')
-        #self.tag_vocab = defaultdict(Counter)
-        #self.vocab = dict()
-        #self.tags = Counter()
+        self.tag_vocab = defaultdict(Counter)
+        self.tag_token = dict()
+        self.vocab = defaultdict(set)
+        self.tags = Counter()
 
     def __iter__(self):
         yield from self.process()
 
     def process(self):
-        #for tokens in self.stanford_pos.tag_sents(self.tokenseq_generator()):
-        for tokens in self.tokenseq_generator():
+        for tokens in self.stanford_pos.tag_sents(self.tokenseq_generator()):
+        #for tokens in self.tokenseq_generator():
             res = []
-            #for token, tag in tokens:
-            for token in tokens:
+            for token, tag in tokens:
+            #for token in tokens:
                 processed = self.process_token(token)
                 if processed:
                     #most_similar = self.w2v.most_similar(token)
-                    #self.tag_vocab[processed].update({tag: 1})
-                    #self.tags.update({tag: 1})
+                    self.tag_vocab[processed].update({tag: 1})
+                    self.tag_token[token] = tag
+                    self.tags.update({tag: 1})
 
                     res.append(processed)
             if res:
@@ -56,8 +58,8 @@ class TextProcessor:
         if re.match(self.re_url, token):
             return TextProcessor.clean_url(self.expanded_urls.get(token, token))
 
-        # t = token.lower()
-        t = token
+        t = token.lower()
+        #t = token
 
         if t in self.stopwords or t in self.punctuation:
             return None
@@ -68,15 +70,14 @@ class TextProcessor:
         if not t.startswith('#'):
             t = t.translate({ord(k): "" for k in self.punctuation})
 
-        #t = self.stemmer.stem(t)
+        t = self.stemmer.stem(t)
 
-        #self.vocab[t] = token
+        self.vocab[t].add(token)
         return t
-        #return t
 
     def tokenseq_generator(self):
         for text in self.corpus:
-            yield self.tokenizer.tokenize(text.lower())
+            yield self.tokenizer.tokenize(text)
 
 
 if __name__ == '__main__':

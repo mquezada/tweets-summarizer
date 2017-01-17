@@ -38,3 +38,20 @@
   - mirar localized pagerank?
   - elegir un evento, y graficar en 2D las palabras + palabras mas cercanas usando modelo completo
    
+* 17 ene 2017
+
+- find fake news?
+- classify events by topic using WE analogies
+- removing noise (spam) from tweets
+- MMR
+
+
+
+- muc (message undestanding conf), tdt, trec 
+- explainability of neural networks
+- analogous events
+- generating summaries
+- finding sub-topics
+- data cleaning/curation/detection
+- applying structure to a bag of tweets
+- user weight on credibility
