@@ -50,7 +50,7 @@ class TweetProcessor:
             return None, None
 
         token = token.translate({ord(k): "" for k in self.punctuation})
-        token = self.stemmer.stem(token)
+        #token = self.stemmer.stem(token)
         self.vocab[token].add(original)
 
         return token, self.data.token_tags.get(original, None)
