@@ -3,8 +3,10 @@ from tweet_processor import TweetProcessor
 from settings import DATA_PATH, STANFORD_POS_PATH, W2V_PATH
 import logging
 import gensim
-from word2vec_mock import w2v
+from word2vec import *
 from operator import itemgetter
+import numpy as np
+
 
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
@@ -16,7 +18,12 @@ data = DataLoader(data_path=DATA_PATH,
 
 tweets = TweetProcessor(data)
 proc_tweets = [t for t in tweets]
+proc2 = list(map(lambda x: list(map(itemgetter(0), x)), proc_tweets))
 
+model = get_model()
+
+
+"""
 logging.info("Loading w2v model...")
 model = gensim.models.Word2Vec.load(W2V_PATH)
 #model = w2v()
@@ -34,3 +41,4 @@ for i in range(len(proc_tweets)):
             selected = map(lambda x: (x, data.token_tags.get(x, 'None')), selected)
             aug_tweet |= set(selected)
     proc_tweets[i].extend(list(aug_tweet))
+"""
