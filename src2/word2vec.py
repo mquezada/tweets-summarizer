@@ -31,7 +31,7 @@ def get_model():
     model_path = pathlib.Path(settings.W2V_PATH)
     if model_path.exists():
         logging.info("Loading word2vec from %s" % settings.W2V_PATH)
-        model = gensim.models.Word2Vec.load(model_path)
+        model = gensim.models.Word2Vec.load(settings.W2V_PATH)
         model.init_sims()
     else:
         logging.info("Loading word2vec mock")
