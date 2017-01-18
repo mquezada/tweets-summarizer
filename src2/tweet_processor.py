@@ -40,7 +40,7 @@ class TweetProcessor:
 
         if re.match(self.re_url, token):
             url = self.data.expanded_urls.get(token, token)
-            return TweetProcessor.clean_url(url), 'NN'
+            return TweetProcessor.clean_url(url), 'URL'
 
         token = token.lower()
         if token in self.stopwords or token in self.punctuation:
@@ -53,7 +53,7 @@ class TweetProcessor:
         #token = self.stemmer.stem(token)
         self.vocab[token].add(original)
 
-        return token, self.data.token_tags.get(original, None)
+        return token, self.data.token_tags.get(original, "NA")
 
     @staticmethod
     def clean_url(url):
