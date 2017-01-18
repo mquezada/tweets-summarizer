@@ -51,7 +51,7 @@ def most_similar(word, topn=3):
     v_word = word2vec(word)
     sims = vectors.dot(v_word)
     indices = np.argpartition(sims, len(vectors) - topn)
-    return [(model.index2word[i], sims[i]) for i in indices]
+    return [(model.index2word[i], sims[i]) for i in indices[-topn:]]
 
 
 def init_vectors():
