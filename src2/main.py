@@ -18,8 +18,8 @@ tweets = TweetProcessor(data)
 proc_tweets = [t for t in tweets]
 
 logging.info("Loading w2v model...")
-#model = gensim.models.Word2Vec.load(W2V_PATH)
-model = w2v()
+model = gensim.models.Word2Vec.load(W2V_PATH)
+#model = w2v()
 threshold = 0.8
 
 for i in range(len(proc_tweets)):
